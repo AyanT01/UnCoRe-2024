@@ -1,0 +1,391 @@
+StackOverFlowID,Bug Type,Type of Bug,Patch/Fix,
+31556268,,," -- model.compile(loss='mean_absolute_error', optimizer=sgd)
+++ model.compile(loss='mse', optimizer='adam', metrics=['accuracy'])
+-- model.fit(train_data,label,nb_epoch = 1000,batch_size = 4,verbose = 1,shuffle=True)
+++ model.fit(train_data, label, nb_epoch = 10000,batch_size = 4,verbose = 1,shuffle=True)",
+50306988,,"Wrong activation Function, Wrong loss function "," -- model.add(Dense(units=nr_classes, activation='softmax'))
+++ model.add(Dense(1, activation='sigmoid'))
+-- model.compile(loss='categorical_crossentropy',
+              optimizer='adam',
+              metrics=['accuracy'])
+++ model.compile(loss='binary_crossentropy',
+              optimizer='adam',
+              metrics=['accuracy'])",
+48251943,,Wrong activation function ," -- model.add(Dense(1, activation='relu'))
+++ model.add(Dense(1, activation='tanh'))",
+38648195,,"Wrong activation Function, Wrong loss function "," -- model.add(Activation('softmax')) 
+ ++model.add(Activation('sigmoid'))
+ -- model.compile(loss='mean_squared_error', optimizer='sgd', metrics=['accuracy'])
+ ++ model.compile(loss='binary_crossentropy', optimizer='sgd', metrics=['accuracy'])",
+33969059,,Wrong activation Function ," -- model.add(Dense(1, init='uniform', activation='softmax'))
+++ model.add(Dense(1, init='uniform', activation='linear'))",
+55328966,,"No data normalization, Wrong activation function "," -- x_train = x_train.values
+++ x_train = x_train.values/255
+-- x_test = x_test.values
+++ x_test = x_test.values/255
+-- model.add(layers.Dense(10, activation='sigmoid'))
+++ model.add(layers.Dense(10, activation='softmax'))",
+34311586,,," -- model.add(Dense(1, init='uniform', activation='softmax'))
+++ model.add(Dense(1, init='uniform', activation='sigmoid'))
+-- sgd = SGD(l2=0.0,lr=0.05, decay=1e-6, momentum=0.11, nesterov=True)
+++ sgd = SGD(lr=0.1, decay=1e-6, momentum=0.9, nesterov=True)
+-- model.fit(X, y, nb_epoch=20)
+++ model.fit(X, y, nb_epoch=10000, batch_size=4)",
+31880720,,Wrong Activation Function," -- model.add(Dense(1,activation='softmax'))
+++ model.add(Dense(1,activation='sigmoid'))",
+39525358,,," ++ scaler = StandardScaler()
+ ++ X = scaler.fit_transform(X)",
+39217567,,"Wrong activation function, Wrong batch size"," -- model.add(Dense(dim, input_dim=dim, init='normal', activation='sigmoid'))
+++ model.add(Dense(dim, input_dim=dim, init='normal', activation='relu'))
+-- model.add(Dense(dim, init='normal', activation='sigmoid'))
+++ model.add(Dense(dim, init='normal', activation='relu'))
+--model.fit(X, y, nb_epoch=1000, batch_size=50, verbose=1)
+++model.fit(X, y, nb_epoch=1000, batch_size=1, verbose=1)",Look into the post
+48934338,,," -- sgd = optimizers.SGD(lr=0.1)
+++ sgd = optimizers.SGD(lr=0.001)",
+47724077,,Wrong optimizer," --model.compile(loss=""categorical_crossentropy"",optimizer=""adam"",metrics=[""accuracy""])
+++ model.compile(loss=""categorical_crossentropy"",optimizer=""sgd"",metrics=[""accuracy""])",Look into it 
+59325381,,," -- y_train = y_train/255
+++ x_test = x_test/255
+++ y_train = to_categorical(y_train, 10)
+++ y_test = to_categorical(y_test, 10)
+ model.compile(optimizer = 'adam',
+--  loss = 'sparse_categorical_crossentropy',
+ metrics  = ['accuracy'])
+ model.compile(optimizer = 'adam',
+++  loss = 'categorical_crossentropy',
+ metrics  = ['accuracy'])",
+59278771,,," ++ mms = MinMaxScaler()
+++ X = mms.fit_transform(X)
+++ model.add(Dense(8, activation=""relu"", kernel_initializer=""normal""))
+-- model.add(Dense(3, activation=""sigmoid"", kernel_initializer=""normal""))
+++ model.add(Dense(3, activation=""softmax"", kernel_initializer=""normal""))
+",
+52800582,,," ++ x_scaler = StandardScaler()
+++ y_scaler = StandardScaler()
+++ x = x_scaler.fit_transform(x[:, None])
+++ y = y_scaler.fit_transform(y[:, None])",
+41372874,,,No issue in the strcuture ,
+34673164,,"Wrong Activation Function, wrong loss function, Added Batch Normalization layer"," ++ model.add(BatchNormalization())
+-- model.add(Activation('softmax')) 
+++model.add(Activation('sigmoid'))
+-- model.compile(loss='mean_squared_error', optimizer=sgd,metrics=[ 'accuracy' ]) 
+++ model.compile(loss='binary_crossentropy', optimizer=sgd, metrics=['accuracy' ])",
+48221692,,," -- neural_network.add(Dense(1, activation='sigmoid'))
+++ neural_network.add(Dense(1, activation='linear'))",
+50079585,,," -- model.add(Dense(1)) 
+++ model.add(Dense(3)) 
+-- model.add(Activation('sigmoid')) 
+++ model.add(Activation('softmax'))
+-- model.compile(loss='binary_crossentropy',optimizer='rmsprop',metrics=['accuracy'])
+++ model.compile(loss='categorical_crossentropy',optimizer='rmsprop', metrics=['accuracy'])",
+45337371,,Wrong activation function," -- model.add(layers.Dense(10, activation='softmax'))
+ ++ model.add(layers.Dense(10, activation='sigmoid'))",
+44066044,,," ++ X = preprocessing.scale(X)
+-- model.add(Dense(1, kernel_initializer='normal', activation='relu')) 
+++ model.add(Dense(1, kernel_initializer='normal', activation='sigmoid'))",
+51930566,,Wrong activation function," -- model.add(Dense(3, init='normal', activation='sigmoid'))
+++ model.add(Dense(3, init='normal', activation='softmax'))",
+47352366,,Wrong activation function," -- model.add(Dense(units = 10, activation = ""relu"")) 
+++ model.add(Dense(units = 10, activation = ""softmax""))",
+45442843,,"Wrong activation function, Wrong loss function"," -- model.add(Dense(1 , init='normal' , activation = 'softmax')) 
+++ model.add(Dense(1 , init='normal' , activation = 'sigmoid'))
+-- model.compile(loss='mean_absolute_error', optimizer='rmsprop',metrics=['accuracy'])
+++ model.compile(loss='binary_crossentropy', optimizer='rmsprop',metrics=['accuracy'])",
+48594888,,," ++ x_train = x_train.astype('float32')
+++ x_test = x_test.astype('float32')
+++ x_train /= 255
+++ x_test /= 255
+-- model.add(Conv2D(filters=256,kernel_size=(3, 3),activation='relu', kernel_initializer='he_normal'))
+++ model.add(Conv2D(filters=256,kernel_size=(2, 2),activation='relu', kernel_initializer='he_normal ))
+-- model.add(Dense(512, activation='relu')) 
+++ model.add(Dense(1024, activation='relu')) 
+-- model.add(Dropout(0.3))
+++ model.add(Dropout(0.4))
+-- model.fit(x_train, y_train,batch_size=1000, epochs=5, verbose=1,validation_data=(x_test, y_test))
+++ model.fit(x_train, y_train,batch_size=500, epochs=5, verbose=1,validation_data=(x_test, y_test))",
+31627380,,"Wrong Activation function, Wrong loss function"," -- model.add(Activation('softmax'))
+++ model.add(Activation('sigmoid')) 
+-- model.compile(loss='categorical_crossentropy', optimizer=""adam"", metrics=['accuracy'])
+++ model.compile(loss='binary_crossentropy', optimizer=""adam"",metrics=['accuracy'] )",
+58609115,,"Wrong Activation function, Wrong loss function"," -- classifier.add(Dense(69, activation='relu', kernel_initializer='random_normal', input_dim=1)) 
+++ classifier.add(Dense(69, activation='sigmoid', kernel_initializer='random_normal', input_dim=1))
+-- classifier.add(Dense(69, activation='relu', kernel_initializer='random_normal'))
+++ classifier.add(Dense(69, activation='sigmoid', kernel_initializer='random_normal'))
+-- classifier.add(Dense(69, activation='softmax', kernel_initializer='random_normal'))
+++ classifier.add(Dense(69, activation='sigmoid', kernel_initializer='random_normal'))
+-- classifier.compile(optimizer ='adam',loss='categorical_crossentropy', metrics=['accuracy'])
+++ classifier.compile(optimizer ='adam',loss='binary_crossentropy', metrics=['accuracy'])",
+50481178,,"Wrong Activation function, Wrong loss function"," -- model.add(keras.layers.Dense(1, activation='sigmoid')) 
+++ model.add(keras.layers.Dense(2, activation='softmax'))
+-- model.compile(loss = 'binary_crossentropy', optimizer = 'adam', metrics = ['accuracy'])
+++ model.compile(loss = 'sparse_categorical_crossentropy', optimizer = 'adam', metrics = ['accuracy'])",
+48385830,,,"            layer1 = Dense(30,
+++                activation='sigmoid',
+                    input_shape=input_shape, kernel_initializer=RandomNormal(stddev=1),
+                     bias_initializer=RandomNormal(stddev=1))
+           layer2 = Dense(10,
+++               activation='softmax',
+                    kernel_initializer=RandomNormal(stddev=1), bias_initializer=RandomNormal(stddev=1))
+          model.compile(optimizer=SGD(lr=3.0),
+--                 loss='mean_squared_error',
+                    metrics=['accuracy'])
+           model.compile(optimizer=SGD(lr=3.0),
+++               loss='categorical_crossentropy',
+                     metrics=['accuracy']) ",
+44164749,,," # -- model.add(Dense(y_train.shape[1], activation='softmax'))
+# ++ model.add(Dense(y_train.shape[1], activation='sigmoid'))
+# -- model.compile(loss='categorical_crossentropy',
+              optimizer=sgd,
+              metrics=['accuracy',])
+# ++ model.compile(loss='binary_crossentropy',
+              optimizer=sgd, metrics=['accuracy',])
+-- epochs=5
+++ epochs=10
+-- lr=0.01
+++ lr=0.05
+# change epoch can improve the accuracy with small impact, change learning rate can improve accuracy quickly
+# change activation function and loss improve not that much: 0.9094 -> 0.9087 after 5 epoch
+# Only change learning rate to 0.05 will achieve 0.9487 accuracy after 5 epoch",
+31556268,,,"     model.fit(X_train, y_train, 
+--  nb_epoch=1000,
+     batch_size=4, verbose=1, shuffle=True)
+     model.fit(train_data, label, 
+++ nb_epoch=10000, 
+     batch_size=4, verbose=1, shuffle=True)
+-- sgd = SGD(clipnorm=0.0, learning_rate=0.05, decay=1e-6, momentum=0.11, nesterov=True)
+++ sgd = SGD(clipnorm=0.0, learning_rate=0.1, decay=1e-6, momentum=0.11, nesterov=True)",
+50306988,,,"# -- model.add(Dense(units=nr_classes, activation='softmax'))
+# ++ model.add(Dense(units=nr_classes, activation='sigmoid'))
+# -- model.compile(loss='categorical_crossentropy',
+              optimizer='adam',
+              metrics=['accuracy'])
+# ++ model.compile(loss='binary_crossentropy',
+              optimizer='adam',
+              metrics=['accuracy'])
+# Above two fixes are already in origin.py
+
+-- optimizer=Adam(lr=0.001),
+++ optimizer=Adam(lr=0.01),
+-- model.fit(x_train, y_train, epochs=5, batch_size=32, verbose=True)
+++ model.fit(x_train, y_train, epochs=10, batch_size=32, verbose=True)",
+33969059,,," -- model.add(Dense(1, init='uniform', activation='softmax'))
+++ model.add(Dense(1, init='uniform', activation='linear'))
+# No fix can help",
+55328966,,," -- x_train = x_train.values
+++ x_train = x_train.values/255
+-- x_test = x_test.values
+++ x_test = x_test.values/255
+-- model.add(layers.Dense(10, activation='sigmoid'))
+++ model.add(layers.Dense(10, activation='softmax'))
+-- optimizer = tf.keras.optimizers.SGD(learning_rate=alpha)
+++ optimizer = tf.keras.optimizers.Adam(learning_rate=alpha). # Changing to Adam can make the learning faster and accuracy higher",
+34311586,,," -- sgd = SGD(lr=0.001, decay=1e-6, momentum=0.9, nesterov=True)
+ ++ sgd = Adam(lr=0.001, decay=1e-6)",
+31880720,,," -- model.add(Activation('softmax'))
+++ model.add(Activation('sigmoid'))
+-- model.fit(X_train, Y_train, verbose=2, validation_data=(X_test, Y_test))
+++ model.fit(X_train, Y_trainnb_epoch=40, verbose=2, validation_data=(X_test, Y_test))",
+39525358,,," ++ scaler = StandardScaler()
+ ++ X = scaler.fit_transform(X)
+ ++ model.add(Activation('sigmoid'))
+-- model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
+++ model.compile(loss='binary_crossentropy', optimizer=keras.optimizers.Adam(learning_rate=0.1), metrics=['accuracy'])",
+39217567,,," -- model.add(Dense(dim, input_dim=dim, init='normal', activation='sigmoid'))
+++ model.add(Dense(dim, input_dim=dim, init='normal', activation='relu'))
+-- model.add(Dense(dim, init='normal', activation='sigmoid'))
+++ model.add(Dense(dim, init='normal', activation='relu'))",
+48934338,,," -- sgd = SGD(lr=0.1)
+++ sgd = SGD(lr=0.0001)P15",
+47724077,,," ++ scaler = StandardScaler()
+++ X = scaler.fit_transform(X)
+--model.compile(loss=""categorical_crossentropy"",optimizer=""adam"",metrics=[""accuracy""])
+++ model.compile(loss=""categorical_crossentropy"",optimizer=""sgd"",metrics=[""accuracy""])
+-- model.compile(loss=""categorical_crossentropy"",optimizer=""adam"",metrics=[""accuracy""])
+++ model.compile(loss=""categorical_crossentropy"",optimizer=keras.optimizers.Adam(learning_rate=0.01),metrics=[""accuracy""])",
+59325381,,," -- y_train = y_train/255
+++ x_test = x_test/255",
+59278771,,," ++ scaler = StandardScaler()
+++ X = scaler.fit_transform(X)
+-- model.add(Dense(4, input_dim=4, activation=""relu"", kernel_initializer=""normal""))
+++ model.add(Dense(4, input_dim=4, activation=""selu"", kernel_initializer=""normal""))
+-- model.add(Dense(3, activation=""sigmoid"", kernel_initializer=""normal""))
+++ model.add(Dense(3, activation=""softmax"", kernel_initializer=""normal""))
+-- model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+++ model.compile(loss='categorical_crossentropy', optimizer='sgd', metrics=['accuracy']). # change to sgd will slightly improve the accuracy",
+41372874,,,,
+34673164,,,"# ++ model.add(BatchNormalization())
+# -- model.add(Activation('softmax')) 
+# ++model.add(Activation('sigmoid'))
+# -- model.compile(loss='mean_squared_error', optimizer=sgd,metrics=[ 'accuracy' ]) 
+# ++ model.compile(loss='binary_crossentropy', optimizer=sgd, metrics=['accuracy' ])
+The accuracy has already been 1 in origin.py therefore, change the label to origin",
+50079585,,," -- model.add(Dense(1)) 
+++ model.add(Dense(3)) 
+-- model.add(Activation('sigmoid')) 
+++ model.add(Activation('softmax'))
+-- model.compile(loss='binary_crossentropy',optimizer='rmsprop',metrics=['accuracy'])
+++ model.compile(loss='categorical_crossentropy',optimizer='rmsprop', metrics=['accuracy'])
+-- optimizer=""rmsprop""
+++ optimizer=keras.optimizers.RMSprop(learning_rate=0.005)
+-- epochs = 10
+++ epochs = 20
+# changing learning rate can slightly improve the result, so is changing epoch",
+44066044,,," ++ X = preprocessing.scale(X)
+# -- model.add(Dense(1, kernel_initializer='normal', activation='relu')) 
+# ++ model.add(Dense(1, kernel_initializer='normal', activation='sigmoid')). # only changing activation value will not affect the result?
+I guess this one is about preprocessing problem and should be origin",
+51930566,,,"# The accuracy of origin.py has already been 1 when activation function is sigmoid, weird though",
+47352366,,," -- model.add(Dense(units=10, activation=""relu"")) 
+++ model.add(Dense(units=10, activation=""softmax""))
+# -- model.fit(x_train, y_train, epochs=1, batch_size=50, verbose=1)
+# ++ model.fit(x_train, y_train, epochs=2, batch_size=50, verbose=1)
+Changing epoch influence little",
+45442843,,," -- model.compile(loss='mean_absolute_error', optimizer='rmsprop')
+++ model.compile(loss='mse', optimizer='adam', metrics=['accuracy'])
+# Changing activation function influences little",
+48594888,,," -- epoch=5
+++ epoch=10",
+31627380,,," -- model.add(Activation('softmax'))
+++ model.add(Activation('sigmoid')) 
+# -- model.compile(loss='categorical_crossentropy', optimizer=""adam"", metrics=['accuracy'])
+# ++ model.compile(loss='binary_crossentropy', optimizer=""adam"",metrics=['accuracy'] )
+-- model.compile(loss='categorical_crossentropy', optimizer=""adam"", metrics=['accuracy'])
+++ model.compile(loss='categorical_crossentropy', optimizer=""sgd"", metrics=['accuracy'])",
+58609115,,," -- classifier.compile(optimizer ='adam',loss='categorical_crossentropy', metrics=['accuracy'])
+++ classifier.compile(optimizer ='adam',loss='binary_crossentropy', metrics=['accuracy'])",
+50481178,,," -- classifier.compile(optimizer ='adam',loss='categorical_crossentropy', metrics=['accuracy'])
+++ classifier.compile(optimizer ='adam',loss='binary_crossentropy', metrics=['accuracy'])",
+56380303,,," -- model.compile(optimizer='sgd', loss='categorical_crossentropy', metrics=['accuracy'])
+++ model.compile(optimizer=Adam(lr=0.0001), loss='categorical_crossentropy', metrics=['accuracy'])",
+59282996,,," ++ for i in range(len(y_batches_train)):
+++     y_batches_train[i][y_batches_train[i] == 1] = 0
+++     y_batches_train[i][y_batches_train[i] == 2] = 1
+++ for i in range(len(y_batches_test)):
+++     y_batches_test[i][y_batches_test[i] == 1] = 0
+++    y_batches_test[i][y_batches_test[i] == 2] = 1
+-- model.add(TimeDistributed(Dense(3, activation='sigmoid')))
+++ model.add(TimeDistributed(Dense(2, activation='sigmoid')))
+-- epoch=10
+++ epoch=30",
+58237726,,," -- BATCH_SIZE = 12
+++ BATCH_SIZE = 6
+++ INPUT_SHAPE = (16, 16, 16, 3)
+++ BATCH_SHAPE = (BATCH_SIZE, *INPUT_SHAPE)
+   def generate_fake_data():
+    for j in range(1, 240 + 1):
+        if j < 120:
+--          yield np.ones((6, 16, 16, 16, 3)), np.array([0., 1.])
+        else:
+--          yield np.zeros((6, 16, 16, 16, 3)), np.array([1., 0.])
+   def generate_fake_data():
+    for j in range(1, 240 + 1):
+        if j < 120:
+++          yield np.ones(INPUT_SHAPE), np.array([0., 1.])
+        else:
+++          yield np.zeros(INPUT_SHAPE), np.array([1., 0.])
+   dataset = tf.data.Dataset.from_generator(generator=lambda: generate_fake_data(),
+                                             output_types=(tf.float32,
+                                                           tf.float32),
+--                                           output_shapes=(tf.TensorShape([6, 16, 16, 16, 3]),
+                                                            tf.TensorShape([2])
+   dataset = tf.data.Dataset.from_generator(generator=lambda: generate_fake_data(),
+                                             output_types=(tf.float32,
+                                                           tf.float32),
+++                                           output_shapes=(tf.TensorShape(INPUT_SHAPE),
+                                                            tf.TensorShape([2])))
+-- def create_model(in_shape=(6, 16, 16, 16, 3)):
+--  input_layer = Input(shape=in_shape)
+--  reshaped_input = Lambda(lambda x: K.reshape(x, (-1, *in_shape[1:])))(input_layer)
+--  conv3d_layer = Conv3D(filters=64, kernel_size=8, strides=(2, 2, 2), padding='same')(reshaped_input)
+--  relu_layer_1 = ReLU()(conv3d_layer)
+--  pooling_layer = GlobalAveragePooling3D()(relu_layer_1)
+--  reshape_layer_1 = Lambda(lambda x: K.reshape(x, (-1, in_shape[0] * 64)))(pooling_layer)
+--  expand_dims_layer = Lambda(lambda x: K.expand_dims(x, 1))(reshape_layer_1)
+--  conv1d_layer = Conv1D(filters=1, kernel_size=1)(expand_dims_layer)
+--  relu_layer_2 = ReLU()(conv1d_layer)
+--  reshape_layer_2 = Lambda(lambda x: K.squeeze(x, 1))(relu_layer_2)
+--  out = Dense(units=2, activation='softmax')(reshape_layer_2)
+--  return Model(inputs=[input_layer], outputs=[out])
+++ def create_model(batch_size, input_shape):
+++  ipt = Input(batch_shape=(batch_size, *input_shape))
+++  x = Conv3D(filters=64, kernel_size=8, strides=(2, 2, 2),
+++             activation='relu', padding='same')(ipt)
+++  x = Conv3D(filters=8, kernel_size=4, strides=(2, 2, 2),
+++             activation='relu', padding='same')(x)
+++  x = GlobalAveragePooling3D()(x)
+++  out = Dense(units=2, activation='softmax')(x)
+++  return Model(inputs=ipt, outputs=out)
+-- clf_model = create_model(in_shape=(6, 16, 16, 16, 3))
+++ clf_model = create_model(BATCH_SIZE, INPUT_SHAPE)
+-- model.compile(optimizer=Adam(lr=1e-3),
+                  loss='categorical_crossentropy',
+                  metrics=['accuracy', 'categorical_crossentropy'])
+++ clf_model.compile(optimizer=Adam(lr=1e-2),
+                  loss='categorical_crossentropy',
+                  metrics=['accuracy', 'categorical_crossentropy'])",
+37624102,,," -- sgd = SGD(lr=0.1, decay=1e-6, momentum=0.9, nesterov=True)
+++ sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
+The loss do decrease",
+39810655,,,"# -- model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+# ++ model.compile(loss='sparse_categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+The accuracy of origin.py is really high and fix doesn't improve many",
+41327601,,,"# -- model.compile(loss='binary_crossentropy', optimizer='adamax', metrics=['categorical_accuracy'])
+# ++ model.compile(loss='categorical_crossentropy', optimizer='adamax', metrics=['categorical_accuracy'])
+The accuracy doesn't improve much",
+41600519,,," -- model.compile(optimizer='rmsprop',loss='binary_crossentropy',metrics=['accuracy'])
+++ model.compile(optimizer=""adam"",loss='binary_crossentropy',metrics=['accuracy'])
+# -- model.fit(X_train,y_train,nb_epoch=1,batch_size=1)
+# ++ model.fit(X_train,y_train,validation_data=(X_test, y_test),nb_epoch=100, batch_size=64)
+-- loss='binary_crossentropy'
+++ loss = 'mse'",
+41947039,,,,
+41977498,,," -- model.compile(optimizer='rmsprop', loss='categorical_crossentropy', metrics=['accuracy'])
+++ model.compile(optimizer=Adam(lr=0.01), loss='categorical_crossentropy', metrics=['accuracy'])
+-- model.fit(X_r, Y_cat, nb_epoch=10)
+++ model.fit(X_r, Y_cat, nb_epoch=100)",
+42514960,,,"# -- autoencoder = Dense(inputs * 2, activation='relu')(inputLayer)
+# ++ autoencoder = Dense(inputs * 2, activation='tanh')(inputLayer)
+# -- autoencoder = Dense(inputs * 2, activation='relu')(autoencoder)
+# ++ autoencoder = Dense(inputs * 2, activation='tanh')(autoencoder)
+# -- autoencoder = Dense(bottleNeck, activation='relu')(autoencoder)
+# ++ autoencoder = Dense(bottleNeck, activation='tanh')(autoencoder)
+# -- autoencoder = Dense(inputs * 2, activation='relu')(autoencoder)
+# ++ autoencoder = Dense(inputs * 2, activation='tanh')(autoencoder)
+# -- autoencoder = Dense(inputs * 2, activation='relu')(autoencoder)
+# ++ autoencoder = Dense(inputs * 2, activation='tanh')(autoencoder)
+# -- utoencoder = Dense(inputs, activation='sigmoid')(autoencoder)
+# ++ autoencoder = Dense(inputs, activation='tanh')(autoencoder)
+The accuracy didn't increase while the loss increase",
+42800203,,," -- model.add(Dense(1, activation='softmax'))
+++ model.add(Dense(1, activation='sigmoid'))",
+44998910,,," -- model.compile(loss='mean_squared_error', optimizer=""sgd"")
+++ model.compile(loss='mean_squared_error', optimizer=keras.optimizers.SGD(learning_rate = 0.03))",
+46642627,,," ++ X = (X - np.max(X)) / np.max(X)
+++ Y = (Y - np.max(Y)) / np.max(Y)
+-- opt = optimizers.SGD(lr=0.01) 
+++ opt = optimizers.Adam()
+# -- model.compile(loss='binary_crossentropy', optimizer=opt, metrics=['mse'])
+# ++ model.compile(loss='mse', optimizer=opt, metrics=['mse'])
+-- opt = optimizers.SGD(lr=0.01)
+++ opt = optimizers.SGD(lr=0.000001)",
+46995209,,Too many Layers," ++ X = (X - np.max(X)) / np.max(X) 
+-- model.add(Dense(10, input_dim=input_dim, activation='tanh')) 
+++ model.add(Dense(10, input_dim=input_dim, activation='relu'))
+++ model.add(Dense(25, input_dim=input_dim, activation='relu'))
+-- model.add(Dense(90, activation='tanh'))
+-- model.add(Dense(10, activation='relu'))
+-- model.add(Dense(10, activation='relu'))
+-- model.add(Dense(10, activation='relu'))
+-- model.add(Dense(10, activation='relu'))
+-- model.add(Dense(10, activation='relu'))
+-- model.add(Dense(10, activation='relu'))
+-- model.add(Dense(10, activation='relu'))
+-- model.add(Dense(10, activation='relu'))
+-- model.add(Dense(10, activation='relu'))",
+51181393,,," -- model.compile(optimizer = 'rmsprop', loss = 'mean_squared_error', metrics = ['accuracy'])
+++ model.compile(optimizer=optimizers.RMSprop(lr=0.1), loss='mean_squared_error', metrics=['mae'])",
+47932589,,," ++ train_x = (train_x - np.min(train_x)) / (np.max(train_x) - np.min(train_x))
+++ train_y = (train_y - np.min(train_y)) / (np.max(train_y) - np.min(train_y))",
+37213388,,," -- nb_epochs = 2
+++ nb_epochs = 10",
